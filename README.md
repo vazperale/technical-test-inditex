@@ -45,7 +45,7 @@
 
 
 ## Proyect structure
-![image](https://github.com/user-attachments/assets/a6929b78-a520-4cd0-a4ef-799668caf2b2)
+![image](https://github.com/user-attachments/assets/1b241911-8f5d-4f2e-bcf4-496f161d8b6d)
 
 -api : functions for return all the mobiles, a specific mobile or filter with seach.
 
@@ -62,6 +62,8 @@
 -types: types for the differents objects types
 
 -views: the three views required in the technical test : listView,ProductView and cartView
+
+-utils: extra functions (like helpers) for a better organization and reusability
 
 -index.css : file with styles for the app
 

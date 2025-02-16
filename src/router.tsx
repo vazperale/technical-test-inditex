@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ProductListView from "./views/ProductListView"; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ProductListView from "./views/ProductListView";
 import { CartProvider } from './context/cartContext';
-import ProductDetailsView from "./views/ProductDetailsView"; 
-import CartView from "./views/CartView"; 
+import ProductDetailsView from "./views/ProductDetailsView";
+import CartView from "./views/CartView";
 
 
 export default function Router() {

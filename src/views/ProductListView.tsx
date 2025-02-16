@@ -136,7 +136,7 @@ export default function ProductListView() {
           <div className="d-flex flex-wrap justify-content-center align-items-start">
             {Filteredproducts.length > 0 ? (
               Filteredproducts.map((product) => (
-                <MobileListItem key={`${product.id}`} mobileProduct={product} />
+                <MobileListItem disabledClick={false} key={`${product.id}`} mobileProduct={product} />
               ))
             ) : (
               <p>No results.</p>

@@ -1,11 +1,13 @@
+// CartContext.tsx (sin exportaciones adicionales)
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { itemCart } from '../types/mobileProductDetails';
+import { addToCart, removeFromCart, getTotal } from '../utils/cartUtils';  // Importa las funciones del archivo util
 
 // Define el tipo del contexto
 interface CartContextType {
   cart: itemCart[];
   addToCart: (product: itemCart) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (id: string, color: string, storage: string) => void;
   getTotal: () => number;
 }
 
@@ -23,26 +25,26 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   // Función para agregar al carrito
-  const addToCart = (product: itemCart) => {
-    const updatedCart = [...cart, product];
+  const handleAddToCart = (product: itemCart) => {
+    const updatedCart = addToCart(cart, product);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   // Función para eliminar del carrito
-  const removeFromCart = (id: string) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
+  const handleRemoveFromCart = (id: string, color: string, storage: string) => {
+    const updatedCart = removeFromCart(cart, id, color, storage);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   // Función para calcular el total
-  const getTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const handleGetTotal = () => {
+    return getTotal(cart);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, getTotal }}>
+    <CartContext.Provider value={{ cart, addToCart: handleAddToCart, removeFromCart: handleRemoveFromCart, getTotal: handleGetTotal }}>
       {children}
     </CartContext.Provider>
   );

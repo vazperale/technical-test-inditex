@@ -10,45 +10,41 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 import { useCart } from '../context/cartContext';
 
-
 export default function ProductDetailsView() {
 
   const settings = {
-    dots: false, // No mostrar los puntos
-    infinite: false, // 
+    dots: false,
+    infinite: false, 
     speed: 500, 
     slidesToShow: 3, 
     slidesToScroll: 1, 
-    draggable: true, // Permitir arrastrar con el ratón
+    draggable: true, 
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2, // Mostrar 2 productos en pantallas medianas
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1, // Mostrar 1 producto en pantallas pequeñas
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
     ],
   };
 
-
   const navigate = useNavigate();
   const { id } = useParams();
-  const [product, setProduct] = useState<mobileProductDetails>(); // Estado para almacenar los productos
+  const [product, setProduct] = useState<mobileProductDetails | null>(null); // Inicializa como null
   const [selectedColor, setSelectedColor] = useState<ColorOption>();
   const [selectedStorage, setSelectedStorage] = useState<StorageOption>();
-  const [hoveredColor, setHoveredColor] = useState<string | null>(null); // Para el hover dinámico
-  const { cart, addToCart } = useCart(); // Usamos el contexto del carrito
-  const [error, setError] = useState<boolean>(false); // Estado para manejar el error de si el producto pasado por url no existe
-
-
+  const [hoveredColor, setHoveredColor] = useState<string | null>(null);
+  const { cart, addToCart } = useCart();
+  const [error, setError] = useState<boolean>(false); // Estado de error
 
   function addProductToCart() {
     if (product && selectedColor && selectedStorage) {
@@ -60,7 +56,6 @@ export default function ProductDetailsView() {
         price: selectedStorage.price,
         quantity: 1
       };
-
 
       const existingProductIndex = cart.findIndex(
         (item: itemCart) =>
@@ -79,31 +74,52 @@ export default function ProductDetailsView() {
   const GetProductMobileDetails = async (id: string) => {
     try {
       const data = await getMobile(id);
-      setSelectedColor(data?.colorOptions[0]);
       if (data) {
         setProduct(data);
+        setSelectedColor(data.colorOptions[0]);
         setError(false);
       } else {
         setError(true);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      setError(true); // Si ocurre un error, se establece error en true
     }
-  }
+  };
 
   useEffect(() => {
-    if (id) GetProductMobileDetails(id);
+    if (id) {
+      GetProductMobileDetails(id);
+    }
   }, [id]);
 
+  // Se renderiza un mensaje de error si hay un error o no hay producto
   if (error) {
     return (
-      <div className="error-404">
-        <h1>Error 404: Producto no encontrado</h1>
-        <p>Lo sentimos, no pudimos encontrar el producto que buscas.</p>
-      </div>
+      <>
+        <div className="d-flex justify-content-between align-items-center mb-2 px-3">
+          <img
+            className="clickable-button"
+            src={LogoWeb}
+            alt="Logo"
+            onClick={() => navigate('/')}
+            style={{ maxWidth: '150px' }}
+          />
+          <span className="d-flex justify-content-between align-items-center clickable-button" onClick={() => navigate('/cart')}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" clipRule="evenodd" d="M14.4706 4H9.76471V7.76471H6V20H18.2353V7.76471H14.4706V4ZM13.5294 7.76471V11.0588H14.4706V7.76471H13.5294ZM10.7059 7.76471V11.0588H9.76471V7.76471H10.7059ZM10.7059 7.76471H13.5294V4.94118H10.7059V7.76471Z" fill="black" />
+            </svg>
+            <span>{cart.length}</span>
+          </span>
+        </div>
+        <span className='backLink' onClick={() => navigate('/')}> &lt; BACK </span>
+        <h2>Lo siento, el producto con ese Id no existe</h2>
+      </>
     );
   }
-  else {
+
+  // Se renderiza el producto si está disponible
+  if (product) {
     return (
       <>
         <div data-testid='details-view'>
@@ -123,7 +139,6 @@ export default function ProductDetailsView() {
             </span>
           </div>
           <span className='backLink' onClick={() => navigate('/')}> &lt; BACK </span>
-
           <div className='phoneDetails d-flex flex-column flex-md-row justify-content-between mb-4' data-testid='phone-details'>
             <img
               src={selectedColor?.imageUrl}
@@ -134,8 +149,7 @@ export default function ProductDetailsView() {
             <div className='specifications d-flex flex-column justify-content-evenly p-3 gap-3'>
               <div className='d-flex flex-column'>
                 <h4>{product?.name}</h4>
-                <h5 data-testid='div-price-details'
-                >{selectedStorage ? `From ${selectedStorage.price} EUR` : null}</h5>
+                <h5 data-testid='div-price-details'>{selectedStorage ? `From ${selectedStorage.price} EUR` : null}</h5>
               </div>
               <div className='d-flex flex-column'>
                 <span>STORAGE ¿HOW MUCH SPACE DO YOU NEED?</span>

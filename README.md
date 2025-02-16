@@ -84,8 +84,3 @@
 - **vitest.config.js**: Specific configuration file for Vitest. Here you can customize options for unit tests, such as the test environment and the inclusion of test files.
 
 
-## Summary of what is the app and  how works
-
-
-  
-

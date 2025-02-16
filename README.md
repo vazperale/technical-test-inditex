@@ -36,4 +36,4 @@
     npm run dev
   ```
 
-### 5  If all is correct, yo can enter in http://localhost:5173/ (or similar, depends of your configuration) and see the app 
+### 5  If all is correct, yo can enter in http://localhost:5173/ (or similar, depends of your configuration) and navigate in the app 

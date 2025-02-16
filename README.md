@@ -24,8 +24,8 @@
     
 ### 4 create a file .env with correct variables :
 
-#VITE_API_URL : the url api
-#VITE_API_KEY : the api key for the request
+## VITE_API_URL : the url api
+## VITE_API_KEY : the api key for the request
 
 
 ### 5  try to run :

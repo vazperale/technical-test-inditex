@@ -84,3 +84,9 @@
 - **vitest.config.js**: Specific configuration file for Vitest. Here you can customize options for unit tests, such as the test environment and the inclusion of test files.
 
 
+## Other important details about proyect
+
+-Review the file 'mobileStoreApi.ts' to read more about a problem with duplicates in the API and the solution that i apply for this test.
+
+-Review the file 'mobileListItem.tsx' for read more about a problem in the slider of page Mobile details and the solution that i apply for this test.
+

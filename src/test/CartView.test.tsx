@@ -58,7 +58,6 @@ describe('CartView', () => {
         const storageOption2 =await screen.findByTestId('256 GB');
         fireEvent.click(storageOption2);
 
-        // Espera a que los productos y botones estén disponibles
         const addToCartButton = await screen.findByTestId('add-cart'); // El botón de agregar al carrito
         fireEvent.click(addToCartButton); // Simula el clic en el botón de agregar al carrito
       

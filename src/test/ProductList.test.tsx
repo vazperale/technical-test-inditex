@@ -124,7 +124,7 @@ describe('ProductListView', () => {
     const details = screen.getByTestId('details-view'); 
   
     expect(details).toBeInTheDocument(); 
-  
+  //se espera ver algun boton para tema de storage y de colores, para confirmar que cargo datos correctamente
     const phoneDetailsColor = screen.getByTestId('Titanium Black'); 
     const phoneDetailsStorage = screen.getByTestId('256 GB'); 
     expect(phoneDetailsColor).toBeInTheDocument();

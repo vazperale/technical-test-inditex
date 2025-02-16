@@ -29,10 +29,10 @@ describe('ProductDetailsView', () => {
       </CartProvider>
     );
 
-    // Espera a que los productos se carguen y aparezcan en el DOM
+    // Espera a que los productos se carguen y aparezcan en el DOM, y reviso si hay botones de cambio de color y de storage para confirmar que se cargan datos
     await waitFor(() => {
-      const phoneDetailsColor = screen.getByTestId('Titanium Black'); // Busca el contenedor principal
-      const phoneDetailsStorage = screen.getByTestId('256 GB'); // Busca el contenedor principal
+      const phoneDetailsColor = screen.getByTestId('Titanium Black'); 
+      const phoneDetailsStorage = screen.getByTestId('256 GB'); 
       expect(phoneDetailsColor).toBeInTheDocument();
       expect(phoneDetailsStorage).toBeInTheDocument();
 
@@ -54,17 +54,19 @@ describe('ProductDetailsView', () => {
 
 
     await waitFor(()=>{
-      const phoneDetailsColor = screen.getByTestId('Titanium Black');
+      const phoneDetailsColor = screen.getByTestId('Titanium Black');//busco el boton para elegir el color en cuestion
 
       // Encuentra la imagen inicial
       const initialImage = screen.getByTestId('image-details') as HTMLImageElement;
-      const initialSrc = initialImage.src; // Busca el contenedor principal
+      const initialSrc = initialImage.src; 
   
+      //hago click en el boton de color
       fireEvent.click(phoneDetailsColor);
 
+
+      //compruebo que el src de la imagen ha cambiado
       const updatedImage = screen.getByTestId('image-details') as HTMLImageElement;
-      expect(updatedImage.src).not.toBe(initialSrc); // Verifica que la URL haya cambiado
-      expect(screen.getByTestId('div-price-details') ).toBeInTheDocument(); // Verifica que la URL haya cambiado
+      expect(updatedImage.src).not.toBe(initialSrc); 
       
     });
   });
@@ -86,11 +88,10 @@ describe('ProductDetailsView', () => {
 
   
 
-  // Espera a que el precio cambie nuevamente
   await waitFor(() => {
 
   // Encuentra el botn de almacenamiento
-  const storageOption2 = screen.getByTestId('256 GB'); // Cambia el nombre según las opciones disponibles
+  const storageOption2 = screen.getByTestId('256 GB'); //selecciono un storage 
 
   // Encuentra el precio inicial
   const priceElement = screen.getByTestId('div-price-details'); // Busca el texto que contiene el precio

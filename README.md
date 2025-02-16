@@ -11,7 +11,7 @@
 
 ### 1 Clone the Repository in a folder that you want
   ```
-    git clone 'la url del proyecto' 
+    git clone https://github.com/vazperale/technical-test-inditex.git
   ```
 
 ### 2 Navigate to it :
